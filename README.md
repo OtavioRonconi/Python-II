@@ -54,4 +54,8 @@ pip install -r requirements.txt
 # Executar servidor
 python manage.py runserver
 ```
-###Teste
+3. **API de Tarefas**
+   - REST API simples
+   - Autenticação via JWT
+   - Documentação Swagger
+   - *Stack*: Django REST Framework, JWT, Docker
