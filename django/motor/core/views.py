@@ -10,3 +10,10 @@ def contato(request):
         'email': 'promptias@promptias.com'
     }
     return render(request, 'contato.html', context)
+
+def sobre(request):
+    return render(request, 'sobre.html')
+def servico(request):
+    return render(request, 'servico.html')
+def veiculo(request):
+    return render(request, 'veiculo.html')
