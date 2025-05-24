@@ -45,6 +45,9 @@ git clone https://github.com/ThalessOliveira/Python.git
 # Navegar para um projeto Django
 cd Python/projetos_django/sistema_biblioteca
 
+# Ambiente virtual (recomendado)
+python -m venv venv
+
 # Instalar dependências (ambiente virtual recomendado)
 pip install -r requirements.txt
 
