@@ -17,3 +17,5 @@ def servico(request):
     return render(request, 'servico.html')
 def veiculo(request):
     return render(request, 'veiculo.html')
+def base(request):
+    return render(request, 'base.html')
