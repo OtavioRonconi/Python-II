@@ -1,10 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseForbidden
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+
+# 1. Importe os ViewSets do DRF
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .serializers import EventoSerializer
+
+# 2. Importe o modelo Item e o novo ItemSerializer
 from .models import Evento, Item
+from .serializers import EventoSerializer, ItemSerializer
 from .forms import ItemForm, EventoForm, SignUpForm
 
 def index(request):
@@ -165,21 +170,31 @@ def cadastro_view(request):
     # Podemos reutilizar nosso template de formulário!
     return render(request, 'churras/evento_form.html', context)
 
-class EventoListCreateAPIView(ListCreateAPIView):
-    queryset = Evento.objects.all()
+class EventoViewSet(viewsets.ModelViewSet):
+    """
+    Este ViewSet provê automaticamente as ações CRUD para os Eventos,
+    filtrando para mostrar apenas os eventos do usuário logado.
+    """
+    # Remova a linha: queryset = Evento.objects.all()
     serializer_class = EventoSerializer
-    # 2. Adicione esta linha para proteger a view
     permission_classes = [IsAuthenticated]
 
-    # Adicione este método à classe
+    def get_queryset(self):
+        """
+        Esta view deve retornar uma lista de todos os eventos
+        para o usuário autenticado atualmente.
+        """
+        return Evento.objects.filter(organizador=self.request.user)
+
     def perform_create(self, serializer):
-        # Esta linha diz ao serializer para, ao salvar,
-        # passar este dado extra: o campo 'organizador'
-        # deve ser preenchido com o usuário que fez a requisição.
         serializer.save(organizador=self.request.user)
 
-class EventoDetailAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Evento.objects.all()
-    serializer_class = EventoSerializer
-    # 3. Adicione esta linha aqui também
+
+# 4. CRIE ESTE NOVO VIEWSET PARA OS ITENS
+class ItemViewSet(viewsets.ModelViewSet):
+    """
+    Este ViewSet provê automaticamente as ações CRUD para os Itens.
+    """
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
     permission_classes = [IsAuthenticated]
