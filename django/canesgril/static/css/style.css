@@ -1,0 +1,266 @@
+/* static/css/style.css */
+
+/* Define variáveis de cor e fontes para fácil customização */
+:root {
+    --bg-color: #f4f4f9;
+    --card-bg-color: #ffffff;
+    --text-color: #333;
+    --primary-color: #e74c3c;
+    --primary-hover-color: #c0392b;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: #eee;
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* Reset básico e configuração do corpo da página */
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* O container principal do conteúdo */
+.card {
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+/* Estilos do cabeçalho */
+header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin: 0 0 10px;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+/* Estilos da seção principal */
+main .info-item {
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+main .info-item:last-child {
+    border-bottom: none;
+}
+
+main h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+
+main p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Estilos do rodapé e botão */
+footer {
+    margin-top: 30px;
+}
+
+/* Estilos para botões genéricos e links com a classe .button */
+button,
+.button {
+    display: inline-block; /* Garante que o link se comporte como um bloco */
+    text-decoration: none; /* Remove o sublinhado do link */
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+button:hover,
+.button:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+}
+
+.back-button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #777;
+    color: white;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #555;
+}
+
+/* Para os links da página inicial não ficarem azuis e sublinhados */
+.event-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Faz a área do link ocupar todo o card */
+    transition: transform 0.2s ease;
+}
+
+.event-link .info-item:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.02);
+}
+
+.edit-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #3498db;
+    text-decoration: none;
+    margin-top: 5px;
+    display: inline-block;
+}
+.edit-link:hover {
+    text-decoration: underline;
+}
+
+/* Para alinhar os botões de ação */
+.item-actions {
+    margin-top: 10px;
+    text-align: left; /* Adicione esta linha */
+}
+
+.delete-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #e74c3c; /* Vermelho para indicar perigo */
+    text-decoration: none;
+    margin-left: 10px; /* Espaço entre 'Editar' e 'Excluir' */
+}
+.delete-link:hover {
+    text-decoration: underline;
+}
+
+/* Para o botão de confirmação na página de exclusão */
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.warning-text {
+    font-weight: 600;
+    color: #e74c3c;
+    text-align: center;
+}
+.info-item-highlight {
+    background-color: #fef5f5;
+    border: 1px solid #e74c3c;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.user-actions {
+    text-align: right;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.user-actions a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+.user-actions a:hover {
+    text-decoration: underline;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(var(--primary-color-rgb, 231, 76, 60), 0.25);
+}
+
+.errorlist {
+    color: #e74c3c;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+.helptext {
+    color: #777;
+    margin-top: 5px;
+    font-size: 0.85rem;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--primary-color);
+    font-size: inherit; /* Herda o tamanho da fonte do texto "Olá, ..." */
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+}
+.link-button:hover {
+    text-decoration: underline;
+}
