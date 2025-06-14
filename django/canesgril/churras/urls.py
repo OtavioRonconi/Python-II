@@ -17,6 +17,7 @@ router.register(r'itens', views.ItemViewSet, basename='item')
 # As URLs da interface web continuam as mesmas
 urlpatterns_web = [
     path('', views.index, name='index'),
+    path('churrasco/', views.churrasco, name='churrasco'),
     path('cadastro/', views.cadastro_view, name='cadastro'),
     path('login/', auth_views.LoginView.as_view(template_name='churras/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
@@ -32,6 +33,7 @@ urlpatterns_web = [
 urlpatterns_api = [
     path('api/', include(router.urls)),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('api/register/', views.UserCreateView.as_view(), name='user_register'),
 ]
 
 # Juntamos as duas listas de URLs

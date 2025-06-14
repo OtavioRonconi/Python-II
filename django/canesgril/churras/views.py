@@ -1,18 +1,38 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseForbidden
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 # 1. Importe os ViewSets do DRF
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets, generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # 2. Importe o modelo Item e o novo ItemSerializer
 from .models import Evento, Item
-from .serializers import EventoSerializer, ItemSerializer
+from .serializers import EventoSerializer, ItemSerializer, UserSerializer
 from .forms import ItemForm, EventoForm, SignUpForm
 
 def index(request):
+    """Renderiza a página inicial."""
+    dados = {'lista_pratos': 
+        {
+            '1':'Picanha',
+            '2':'Costela',
+            '3':'Maminha',
+        }
+    }
+    # 2. Busque todos os objetos Evento no banco de dados
+    eventos_lista = Evento.objects.all().order_by('-data') 
+
+    # 3. Crie um "contexto" para enviar os dados para o template
+    context = {
+        'eventos': eventos_lista,
+    }
+
+    # 4. Renderize o template, passando o contexto com os dados
+    return render(request, 'index.html', dados)
+def index2(request):
     """Renderiza a página inicial."""
     # 2. Busque todos os objetos Evento no banco de dados
     eventos_lista = Evento.objects.all().order_by('-data') 
@@ -23,7 +43,13 @@ def index(request):
     }
 
     # 4. Renderize o template, passando o contexto com os dados
-    return render(request, 'churras/index.html', context)
+    return render(request, 'index.html', context)
+
+def churrasco(request):
+    """Renderiza a página churrasco."""
+
+    # 4. Renderize o template, passando o contexto com os dados
+    return render(request, 'churrasco.html')
 
 # NOVA VIEW
 @login_required
@@ -198,3 +224,8 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
     permission_classes = [IsAuthenticated]
+
+class UserCreateView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny] # Permite que qualquer um acesse esta view

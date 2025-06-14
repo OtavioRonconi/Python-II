@@ -2,35 +2,40 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 
 export default function Header() {
-  const { token, logout } = useAuth();
+  const { token, logout, user } = useAuth(); // Adicionamos o 'user' para pegar o nome
 
   return (
-    <header style={{ 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      alignItems: 'center', 
-      padding: '1rem 2rem', 
-      backgroundColor: '#f8f9fa',
-      borderBottom: '1px solid #dee2e6'
-    }}>
-      <Link href="/" style={{ fontWeight: 'bold', textDecoration: 'none', color: '#333' }}>
-        🔥 CanesGril
-      </Link>
-      <nav>
-        {token ? (
-          <button onClick={logout} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#e74c3c', fontWeight: 'bold' }}>
-            Sair
-          </button>
-        ) : (
-          <>
-            <Link href="/login" style={{ marginRight: '1rem', textDecoration: 'none', color: '#555' }}>Entrar</Link>
-            <Link href="/cadastro" style={{ textDecoration: 'none', color: '#555' }}>Cadastre-se</Link>
-          </>
-        )}
-      </nav>
+    // Header com fundo semitransparente e efeito de blur
+    <header className="sticky top-0 z-50 bg-slate-900/75 backdrop-blur-lg border-b border-slate-700">
+      <div className="container mx-auto px-4">
+        <nav className="flex justify-between items-center py-4">
+          <Link href="/">
+            <Image src="/img/core-img/logo.png" alt="Canes Grill Logo" width={150} height={40} />
+          </Link>
+
+          <div className="flex items-center space-x-6">
+            {token ? (
+              <>
+                <span className="text-slate-300">Olá, {user?.username}</span>
+                <button onClick={logout} className="btn btn-primary">
+                  Sair
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="text-slate-300 hover:text-white font-semibold">Entrar</Link>
+                <Link href="/cadastro" className="btn btn-primary">
+                  Cadastre-se
+                </Link>
+              </>
+            )}
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }

@@ -20,22 +20,25 @@ class Evento(models.Model):
 # Este modelo é análogo ao "Produto" do seu PDF. 
 # São os itens que "pertencem" a um evento.
 class Item(models.Model):
-    # Tipos de itens para facilitar a organização
-    TIPO_CHOICES = [
-        ('CARNE', 'Carne'),
-        ('BEBIDA', 'Bebida'),
-        ('SUPRIMENTO', 'Suprimento'), # (Carvão, Gelo, etc.)
-        ('OUTRO', 'Outro'),
-    ]
+    # ... (os outros campos continuam os mesmos) ...
+    nome = models.CharField(max_length=100)
+    quantidade = models.DecimalField(max_digits=8, decimal_places=2) 
+    unidade = models.CharField(max_length=10, default='kg')
+    
+    # Adicione esta linha
+    preco = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, related_name='itens')
-    nome = models.CharField('Nome do Item', max_length=100)
-    quantidade = models.DecimalField('Quantidade', max_digits=8, decimal_places=2)
-    unidade = models.CharField('Unidade (kg, L, un)', max_length=20)
-    tipo = models.CharField('Tipo do Item', max_length=20, choices=TIPO_CHOICES, default='OUTRO')
+    TIPO_CHOICES = (
+        ("CARNE", "Carne"),
+        ("BEBIDA", "Bebida"),
+        ("SUPRIMENTO", "Suprimento"),
+        ("OUTRO", "Outro"),
+    )
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='OUTRO')
+    evento = models.ForeignKey(Evento, related_name='itens', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.nome} ({self.quantidade} {self.unidade})"
+        return self.nome
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):

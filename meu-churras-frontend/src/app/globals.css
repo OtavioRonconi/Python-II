@@ -1,26 +1,39 @@
 @import "tailwindcss";
 
+/* ... (as seções :root e body continuam iguais) ... */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 249 250 251;
+  --foreground: 17 24 39;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Usando as cores da paleta 'slate' do Tailwind */
+    --background: 30 41 59;   /* slate-800 */
+    --foreground: 226 232 240; /* slate-200 */
   }
 }
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+}
+
+
+@layer components {
+  .form-input {
+    @apply mt-1 block w-full rounded-md border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-600 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200;
+  }
+  /* A classe base com o estilo principal do botão */
+  .btn {
+    @apply font-bold py-2 px-4 rounded-lg transition-colors duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-px;
+  }
+  /* As classes modificadoras SÓ têm a cor, sem o '@apply btn' */
+  .btn-primary {
+    @apply bg-red-500 text-white hover:bg-red-600;
+  }
+  .btn-secondary {
+    @apply bg-gray-600 text-white hover:bg-gray-700;
+  }
+  .btn-blue {
+    @apply bg-blue-500 text-white hover:bg-blue-600;
+  }
 }

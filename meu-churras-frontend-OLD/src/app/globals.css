@@ -1,0 +1,23 @@
+/* src/app/globals.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .form-input {
+    @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50;
+  }
+  .btn {
+    @apply font-bold py-2 px-4 rounded-lg transition-colors duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-px;
+  }
+  .btn-primary {
+    @apply btn bg-red-500 text-white hover:bg-red-600;
+  }
+  .btn-secondary {
+    @apply btn bg-gray-600 text-white hover:bg-gray-700;
+  }
+  .btn-blue {
+    @apply btn bg-blue-500 text-white hover:bg-blue-600;
+  }
+}
