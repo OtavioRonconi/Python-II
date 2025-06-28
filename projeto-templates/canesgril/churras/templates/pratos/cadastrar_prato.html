@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include "partials/menu.html" %}
+<div class="container" style="padding: 80px 0;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="contact-form">
+                <h2 class="text-center mb-4">Cadastrar Nova Receita</h2>
+                <form action="{% url 'cadastrar_prato' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <div class="form-group mb-3">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="alert alert-danger p-1 mt-1">
+                                    {% for error in field.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn delicious-btn mt-30">Salvar Receita</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
