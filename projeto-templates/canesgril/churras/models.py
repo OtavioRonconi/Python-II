@@ -1,9 +1,11 @@
 from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
+from funcionario.models import Funcionario
 
 class Prato(models.Model):
 
+    # funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
     pessoa = models.ForeignKey(User, on_delete=models.CASCADE)
 
     nome_prato = models.CharField(max_length=100)
