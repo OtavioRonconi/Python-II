@@ -1,19 +1,19 @@
 from django.contrib import admin
-from .models import Evento, Item
+from .models import Prato
 
-# Classe para customizar a exibição do modelo Evento no Admin
-# Análogo ao ClienteAdmin na página 52 do seu PDF 
-class EventoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'data', 'local')
-    search_fields = ('nome', 'local')
+class ListandoPratos(admin.ModelAdmin):
+    list_display = ('id', 'nome_prato', 'categoria', 'tempo_preparo', 'publicado')
+    list_display_links = ('id', 'nome_prato')
+    search_fields = ('nome_prato',)
+    list_filter = ('categoria',)
+    list_editable = ('publicado',)
+    list_per_page = 10
+    actions = ['marcar_como_publicado']
 
-# Classe para customizar a exibição do modelo Item no Admin
-# Análogo ao ProdutoAdmin na página 52 do seu PDF 
-class ItemAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'evento', 'tipo', 'quantidade', 'unidade')
-    list_filter = ('evento', 'tipo')
-    search_fields = ('nome',)
+    def marcar_como_publicado(self, request, queryset):
+        atualizados = queryset.update(publicado=True)
+        self.message_user(request, f"{atualizados} pratos foram marcados como publicados.")
+    marcar_como_publicado.short_description = "Publicar Todos"
 
-# Registrando os modelos com suas respectivas classes de customização
-admin.site.register(Evento, EventoAdmin)
-admin.site.register(Item, ItemAdmin)
+# Register your models here.
+admin.site.register(Prato, ListandoPratos,)

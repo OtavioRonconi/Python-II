@@ -1,15 +1,76 @@
+# Arquivo gerado por https://www.toptal.com/developers/gitignore/api/python,django,pycharm
+# Editado e comentado para maior clareza.
 
-# Ignorar diretórios de ambientes virtuais
+### Ambientes Virtuais ###
+# Ignore o diretório do ambiente virtual, que contém as dependências do projeto.
+# Cada desenvolvedor deve criar seu próprio ambiente.
+.venv/
 venv/
-*/venv/
+env/
+.env
 
-# Ignorar caches do Python
+### Arquivos de Bytecode e Cache do Python ###
+# O Python gera esses arquivos automaticamente. Eles não são necessários no repositório.
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.Python
+.cache
 
-# Ignorar arquivos de configuração específicos do ambiente
+### Arquivos de Banco de Dados ###
+# Ignore o banco de dados de desenvolvimento local (SQLite).
+# Em produção, você provavelmente usará um banco de dados mais robusto.
+#db.sqlite3
+#db.sqlite3-journal
+
+### Arquivos de Mídia e Estáticos ###
+# Ignore os arquivos enviados por usuários (media).
+# Os arquivos estáticos coletados também não precisam ser versionados.
+/media/
+/staticfiles/
+
+### Arquivos de Configuração Local ###
+# Nunca envie arquivos com senhas, chaves de API ou outras informações sensíveis.
+# Crie um arquivo de exemplo (ex: .env.example) para que outros saibam quais variáveis são necessárias.
+local_settings.py
+.env
+*.env.*
+
+### Arquivos de Logs ###
+# Arquivos de log são gerados pela aplicação e não devem ser versionados.
 *.log
-*.tmp
-*.bak
+logs/
+
+### Relatórios de Testes e Cobertura ###
+# Resultados de testes e relatórios de cobertura são gerados a cada execução.
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
+### Arquivos de Distribuição e Empacotamento ###
+# Arquivos gerados ao construir ou distribuir o projeto.
+build/
+dist/
+*.egg-info/
+*.egg
+
+### Arquivos de IDEs e Editores de Código ###
+# Configurações específicas do ambiente de desenvolvimento de cada usuário.
+# JetBrains (PyCharm, WebStorm, etc.)
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+### Arquivos de Sistema Operacional ###
+# Arquivos de metadados gerados por sistemas operacionais.
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db

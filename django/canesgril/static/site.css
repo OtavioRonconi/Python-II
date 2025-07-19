@@ -14,9 +14,13 @@
   margin: 0;
   padding: 0; }
 
-body {
+html, body {
   font-family: "Open Sans", sans-serif;
-  font-size: 14px; }
+  font-size: 14px;
+  background-color: #000 !important;
+  color: #fff !important;
+}
+  
 
 h1,
 h2,

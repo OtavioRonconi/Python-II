@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- Título -->
+<title>Canes Grill - Home</title>
+<style>
+    * {
+      background-color: black !important;
+      color: white !important;
+    }
+</style>
+</head>
+<body>
+    {% include "partials/menu.html" %}
+    
+     <!-- ##### Best Receipe Area Start ##### -->
+     <section class="best-receipe-area">
+        <div class="container">
+            <div class="row">
+                
+                {% for prato in lista_pratos  %}
+                    <!-- Single Best Receipe Area -->
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="single-best-receipe-area mb-30">
+                            {% if prato.foto_prato == '' %}
+                                <img src={% static "img/bg-img/foto_receita.png" %} alt="">
+                            {% else %}
+                                <img src="{{ prato.foto_prato.url }}" alt="">
+                            {% endif %}
+                            <div class="receipe-content">
+                                <a href="{% url 'churrasco' prato.id %}">
+                                    <h5>{{ prato.nome_prato }}</h5>
+                                    <h6>{{ prato.categoria }}</h6>
+                                </a>
+                                <h6>Por: {{ prato.funcionario }}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### Best Receipe Area End ##### -->
+    {% include "partials/paginator.html" %}
+ 
+    <!-- ##### Footer Area Start ##### -->
+    {% include "partials/footer.html" %}
+{% endblock %}
